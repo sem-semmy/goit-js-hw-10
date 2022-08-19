@@ -1,9 +1,8 @@
 import './css/styles.css';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import debounce from 'lodash.debounce';
-import { fetchCountries } from './js/fetchCountries.js';
-// import card from './parsal/cantri-card.hbs';
-// import list from './parsal/list-cantri.hbs';
+import { Notify } from 'notiflix';
+import { fetchCountries } from './fetchCountries.js';
+
 
 const DEBOUNCE_DELAY = 300;
 const input = document.querySelector('#search-box');
