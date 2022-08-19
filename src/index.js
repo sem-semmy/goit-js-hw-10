@@ -20,6 +20,67 @@ function cleanPage() {
 
 function onInput(event) {
   event.preventDefault();
+  const searchField = event.target.value.trim()
+
+if( !searchField) {
+    cleanPage()
+    return;
+}  
+
+fetchCountries(searchField)
+    .then(countries => {
+        if(countries.length > 10) {
+          Notify.info(`Too many matches found. Please enter a more specific name.`)  
+return;
+        }
+        if(countries.length > 1 && countries.length <= 10) {
+            creationCountriesList(countries);
+        }
+        // if(countries.length === 1) {
+            else {
+
+                creationCountriesDiv(countries);
+            }
+    })
+    .catch (() => Notify.failure(`Oops, there is no country with that name`))
+
+
+fetchCountries(inputSearch)
+.then(countries => {
+  clearPage(); //Якщо користувач повністю очищає поле пошуку, то HTTP-запит не виконується, а розмітка списку країн або інформації про країну зникає.
+  if (countries.length > 10) {
+    Notify.info(
+      'Too many matches found. Please enter a more specific name.'
+    );
+    return; //?
+  }
+  if (countries.length > 1 && countries.length <= 10) {
+    renderContryList(countries);
+  } else {
+    renderContryCard(countries);
+  }
+})
+.catch(() => Notify.failure('Oops, there is no country with that name'));
+}
+// Якщо бекенд повернув від 2-х до 10-и країн, під тестовим полем відображається список знайдених країн. 
+// Кожен елемент списку складається з прапора та назви країни.
+// Якщо результат запиту - це масив з однією країною, в інтерфейсі відображається розмітка 
+// картки з даними про країну: прапор, назва, столиця, населення і мови.
+// Тобі потрібні тільки наступні властивості:
+
+// name.official - повна назва країни
+// capital - столиця
+// population - населення
+// flags.svg - посилання на зображення прапора
+// languages - масив мов
+
+
+function creationCountriesList() {
+
+    const macup
+}
+function creationCountriesDiv(countries){
+    const markup = countries.map(({name,capital,population,flags,languages}) => )
 }
 //
 //
